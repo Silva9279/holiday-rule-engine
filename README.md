@@ -29,3 +29,10 @@ The trade-off: this library computes dates only. It does not know which jurisdic
 The `NearestWeekday` rule handles the case where a nominal holiday falls on a weekend by moving to the adjacent Friday (for Saturday) or Monday (for Sunday). The genuinely ambiguous case is when the target is a Sunday that is exactly equidistant from the preceding Friday and the following Monday. We resolve this by moving **forward to Monday**, matching the US federal-observance convention for holidays like New Year's Day. If you need the opposite convention (back to Friday), do not use this rule — write your own.
 
 A second edge worth flagging: the `NthWeekday` rule throws when you ask for a fifth occurrence in a month that has only four. Returning the first occurrence of the next month would be a silent wrong-date bug, so we fail loudly.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
