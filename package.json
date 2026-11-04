@@ -1,6 +1,6 @@
 {
   "name": "holiday-rule-engine",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Computes the exact date of observed holidays for a given year using rules like 'fourth Thursday of November' and 'nearest weekday to January 1'.",
   "type": "module",
   "main": "src/index.js",
